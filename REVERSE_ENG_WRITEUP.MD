@@ -5,7 +5,7 @@ In this writeup i will describe my approach reverse engineering the given binary
 
 ### Step 1:
 When you will go to the given link you will see a file named "reverse_me" with no extensions or file type. As said in the task that it is an ELF file which means it is Executable Linux Format and it only can be executed in linux. So I downloaded it and execute the file to know the extension of the file <br>
-![](images/1.jpg)
+![](Images/1.jpg)
 As you can see in the above image that after running the file it gives a error message saying "[3373] Error loading Python lib. By this error we can clearly see that the file is a python file and it is trying to import a library named "libpython3.10.so.1.0" which is not present in the directory. So we need to find this library and import it in the file.<br>
 
 ### Step 2:
@@ -17,7 +17,7 @@ So simply clone the repository and then run the pyinstxtractor.py file.<br>
 To tell about pyinstxtractor:<br>
 PyInstaller Extractor is a Python script to extract the contents of a PyInstaller generated executable file.
 The header of the pyc files are automatically fixed so that a Python bytecode decompiler will recognize it. The script can run on both Python 2.x and 3.x.
-![](images/2.jpg)
+![](Images/2.jpg)
 This will create a folder named "reverse_me_extracted" which is containing all the pyc files and pyz of the executable file. In that folder we will see a reverse_me.pyc file which is the main pyc which we will decompile to get the source code using a decompliler pycdc.py.
 
 ### Step 3:
@@ -31,7 +31,7 @@ As these commands exectution is output is to long for a screenshot simply execut
 <code>make check </code><br>
 After this you will have pycdc executable in pycdc folder. <br>
 Now you have to just run the pycdc file wth the path to the reverse_me.pyc file.
-![](images/3.jpg)
+![](Images/3.jpg)
 Here the flag is written but encrypted. So we have to decrypt it to get the flag.
 
 ### Step 4:
@@ -40,5 +40,5 @@ So after decompiling the elf we got the encrypted *flag "IHlvdSBnMHQgbWUgM2V2ZXJ
 *Command used: "echo "IHlvdSBnMHQgbWUgM2V2ZXJzZWQgYWhoaGhoCg==" | base64 -d"*<br>
 **OR WE CAN USED**<br>
 *Command used: "echo -n "IHlvdSBnMHQgbWUgM2V2ZXJzZWQgYWhoaGhoCg==" | base64 --decode"*
-![](images/4.jpg) <br>
+![](Images/4.jpg) <br>
 Finally we got the flag **"You got me 3versed ahhhh"**
